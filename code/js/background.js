@@ -71,6 +71,13 @@
   });
 
   /**
+   * Messages sent from other extensions (such as Streamkeys Remote).
+   */
+  chrome.runtime.onExternalMessage.addListener(function(request, sender, response) { // jshint ignore:line
+    if(request.action == "command") sendAction(request.command);
+  });
+
+  /**
    * Open info page on install/update
    */
   chrome.runtime.onInstalled.addListener(function(details) {
